@@ -4,5 +4,5 @@ from . import views
 # <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
 
 urlpatterns = [
-    path('', views.permission_classes),
+    path('', views.user_decks),
 ]

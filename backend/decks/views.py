@@ -13,7 +13,7 @@ from .serializers import DeckSerializer
 @permission_classes([IsAuthenticated])
 def user_decks(request):
     print(
-        'User ', f"{request.user.id} {request.user.email} {request.user.username}")
+        'User DECKS', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
         serializer = DeckSerializer(data=request.data)
         if serializer.is_valid():

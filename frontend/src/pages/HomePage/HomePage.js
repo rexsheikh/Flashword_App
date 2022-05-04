@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
@@ -10,6 +11,7 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [cars, setCars] = useState([]);
+  const [decks, setDecks] = useState([]);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -25,7 +27,25 @@ const HomePage = () => {
       }
     };
     fetchCars();
+    fetchDecks();
   }, [token]);
+
+  const fetchDecks = async () => {
+    try {
+      let response = await axios.get("http://127.0.0.1:8000/api/decks/",{
+        headers: {
+          Authorization: "Bearer " + token
+        },
+      });
+      setDecks(response.data);
+      console.log(`DECKS: ${decks}`)
+      console.log(`DECKS: ${decks[0].words[0].word}`)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>

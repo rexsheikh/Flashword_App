@@ -5,7 +5,7 @@ from .models import Deck, Word
 class DeckSerializer(serializers.ModelSerializer):
     class Meta:
         model = Deck
-        fields = ['id', 'words', 'deck_streak']
+        fields = ['id', 'words', 'deck_streak', 'user_id']
         depth = 1
 
 

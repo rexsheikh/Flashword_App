@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.user_decks),
+    # path('update_word/')
 ]

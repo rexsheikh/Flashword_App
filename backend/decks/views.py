@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
-from .models import Deck
-from .serializers import DeckSerializer
+from .models import Deck, Word
+from .serializers import DeckSerializer, WordSerializer
 
 # Create your views here.
 
@@ -24,3 +24,14 @@ def user_decks(request):
         decks = Deck.objects.filter(user_id=request.user.id)
         serializer = DeckSerializer(decks, many=True)
         return Response(serializer.data)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_word(request, pk, buttonClick):
+    word = get_object_or_404(Word, pk=pk)
+    word.score += buttonClick
+    word_serializer = WordSerializer(word, data=request.data, partial=True)
+    if word_serializer.is_valid():
+        word_serializer.save()
+        return Response(word_serializer.data, status=status.HTTP_201_CREATED)

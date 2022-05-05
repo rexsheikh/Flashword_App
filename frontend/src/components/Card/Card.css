@@ -5,3 +5,11 @@
     border-width: thick;
     border-color: black;
 }
+
+.show{
+    color:black;
+}
+
+.hide{
+    color: white;
+}

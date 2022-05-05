@@ -1,7 +1,7 @@
-
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import DeckCard from "../../components/DeckCard/DeckCard";
 
 import axios from "axios";
 
@@ -39,7 +39,6 @@ const HomePage = () => {
       });
       setDecks(response.data);
       console.log(`DECKS: ${decks}`)
-      console.log(`DECKS: ${decks[0].words[0].word}`)
     } catch (error) {
       console.log(error.message)
     }
@@ -48,13 +47,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.make} {car.model}
-          </p>
-        ))}
+      <p> {decks[0].words[0].word}</p>
     </div>
   );
 };

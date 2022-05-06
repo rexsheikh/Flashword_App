@@ -7,6 +7,7 @@ const DeckCard = (props) => {
  const [showDef,setShowDef] = useState("hide")
  const [score,setScore] = useState(0);
  const [user, token] = useAuth();
+ let word = 'river'
 
 
  function handleDefClick(){
@@ -14,15 +15,19 @@ const DeckCard = (props) => {
  }
 
  function handleScoreClick(){
-     setScore(1);
      updateWordScore();
  }
 
-//  path('update_word/<int:pk>/<int:scoreUpdate>', views.update_word)
 
  const updateWordScore = async () => {
+   let body = {
+     score: 10
+   };
     try {
-      let response = await axios.get(`http://127.0.0.1:8000/api/decks/updateScore/${props.parentDeck[0].words[0]}/${score}`,{
+      let response = await axios.patch(
+        `http://127.0.0.1:8000/api/decks/update_word/${word}/`,
+        body,
+        {
         headers: {
           Authorization: "Bearer " + token
         },
@@ -44,7 +49,6 @@ const DeckCard = (props) => {
             <div> 
              <button onClick = {handleScoreClick} > Score </button>  
             </div>
-    
         </div>
     );
 }

@@ -30,10 +30,7 @@ const HomePage = () => {
     }
   }
 
-  console.log(`example reference: ${decks[0].words[0].id}`)
-  // console.log(`deck length ${decks.length}`)
-
-
+  
   if(decks.length == 0){
     return(
       <div> decks loading </div>

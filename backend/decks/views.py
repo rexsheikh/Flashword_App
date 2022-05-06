@@ -26,11 +26,21 @@ def user_decks(request):
         return Response(serializer.data)
 
 
-@api_view(['PATCH'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def update_word(request, pk, buttonClick):
+def get_word(request, pk):
+    deck = get_object_or_404(Deck, pk=pk)
+    words_set = deck.words.all()
+    print(words_set)
+    serializer = DeckSerializer(deck)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@ api_view(['PATCH'])
+@ permission_classes([IsAuthenticated])
+def update_word(request, pk, scoreUpdate):
     word = get_object_or_404(Word, pk=pk)
-    word.score += buttonClick
+    word.score += scoreUpdate
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()

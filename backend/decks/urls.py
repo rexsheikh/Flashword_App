@@ -5,5 +5,6 @@ from . import views
 
 urlpatterns = [
     path('', views.user_decks),
-    # path('update_word/')
+    path('update_word/<int:pk>/<int:scoreUpdate>/', views.update_word),
+    path('get_word/<int:pk>/', views.get_word)
 ]

@@ -10,6 +10,7 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [decks, setDecks] = useState([]);
+  
 
   useEffect(() => {
     fetchDecks();
@@ -29,7 +30,7 @@ const HomePage = () => {
     }
   }
 
-  // console.log(`example reference: ${decks[0].words[0].word}`)
+  console.log(`example reference: ${decks[0].words[0].id}`)
   // console.log(`deck length ${decks.length}`)
 
 

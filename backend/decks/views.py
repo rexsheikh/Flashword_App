@@ -30,9 +30,14 @@ def user_decks(request):
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def word_list(request):
-    words = Word.objects.all()
-    serializer = WordSerializer(words, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        words = Word.objects.all()
+        serializer = WordSerializer(words, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = WordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['GET'])

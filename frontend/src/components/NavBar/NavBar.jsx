@@ -45,12 +45,6 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <input type = "text"
-          onChange={(e) => setQuery(e.target.value)}
-          />
-          <button type="submit" onClick = {handleSearch}>submit</button>
-        </li>
-        <li>
           {user ? (
             <button onClick={logoutUser}>Logout</button>
           ) : (

@@ -27,12 +27,43 @@ def user_decks(request):
         return Response(serializer.data)
 
 
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def word_list(request):
+    words = Word.objects.all()
+    serializer = WordSerializer(words, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_word(request, word_search):
-    word = Word.objects.get(word=word_search)
-    serializer = WordSerializer(word)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if request.method == 'GET':
+        word = Word.objects.get(word=word_search)
+        serializer = WordSerializer(word)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def add_word(request, pk, word):
+    deck = get_object_or_404(Deck, pk=pk)
+    word = Word.objects.get(word=word)
+    deck.words.add(word)
+    serializer = DeckSerializer(data=request.data)
+    if serializer.is_valid:
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@ api_view(['POST'])
+@ permission_classes([IsAuthenticated])
+def update_word(request, word_search):
+    word = get_object_or_404(Word, word=word_search)
+    word_serializer = WordSerializer(word, data=request.data, partial=True)
+    if word_serializer.is_valid():
+        word_serializer.save()
+        return Response(word_serializer.data, status=status.HTTP_201_CREATED)
 
 
 @ api_view(['PATCH'])

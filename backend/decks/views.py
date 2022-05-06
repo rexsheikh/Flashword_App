@@ -39,7 +39,6 @@ def get_word(request, word_search):
 @ permission_classes([IsAuthenticated])
 def update_word(request, word_search):
     word = get_object_or_404(Word, word=word_search)
-    word.score += 1
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()

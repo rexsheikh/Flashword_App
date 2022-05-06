@@ -24,7 +24,6 @@ const HomePage = () => {
         },
       });
       setDecks(response.data);
-      console.log(`DECKS: ${decks}`)
     } catch (error) {
       console.log(error.message)
     }
@@ -38,7 +37,7 @@ const HomePage = () => {
   }else{
   return (
     <div className="container">
-      <Card parentDeck = {decks}/>
+      <Card parentDecks = {decks}/>
     </div>
   );}
 };

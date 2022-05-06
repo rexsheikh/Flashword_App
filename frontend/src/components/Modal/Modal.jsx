@@ -1,6 +1,8 @@
 import { Modal,Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+
 
 const MainModal = () => {
     const [show, setShow] = useState(false);
@@ -8,21 +10,60 @@ const MainModal = () => {
     const handleShow = () => setShow(true);
     const[query,setQuery] = useState('')
     const[word,setWord] = useState('')
+    const [user, token] = useAuth();
+    console.log(word)
 
     const handleSearch = () =>{
         getWebsterWord();
+        createWord();
+        addWord();
+
       }
-      const getWebsterWord = async () =>{
+
+    const getWebsterWord = async () =>{
         try {
-          let response = await axios.get(
+            let response = await axios.get(
             `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${query}?key=939c6c16-c538-4b7c-8ee9-f01f9725a621`
-          );
-          setWord(response.data);
-          console.log("alert, api call made")
+            );
+            setWord(response.data);
+            console.log("alert, api call made")
         } catch (e) {
-          console.log(e.message);
+            console.log(e.message);
         }
-      }
+        }
+
+    const createWord = async () => {
+        let body = {
+            score: 0,
+            word: query,
+            definition: word[0].shortdef[0]
+        };
+            try {
+            let response = await axios.post(
+                `http://127.0.0.1:8000/api/decks/words_list`,
+                body,
+                {
+                headers: {
+                Authorization: "Bearer " + token
+                },
+            });
+            } catch (error) {
+            console.log(error.message)
+            }}
+
+      const addWord = async () => {
+         try {
+           let response = await axios.patch(
+             `http://127.0.0.1:8000/api/decks/add_word/5/${query}/`,
+             {
+             headers: {
+               Authorization: "Bearer " + token
+             },
+           });
+         } catch (error) {
+           console.log(error.message)
+         }
+        }
   
     return (
         <div> 
@@ -55,5 +96,4 @@ const MainModal = () => {
         </div>
     );
   }
-  
 export default MainModal;

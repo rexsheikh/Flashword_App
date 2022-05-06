@@ -16,8 +16,11 @@ const Navbar = () => {
   const navigate = useNavigate();
   const[query,setQuery] = useState('')
   const[word,setWord] = useState('')
-  console.log(query)
-  
+  // console.log(query)
+  // console.log(word[0].shortdef[0])
+
+
+
   const handleSearch = () =>{
     getWebsterWord();
   }
@@ -27,7 +30,7 @@ const Navbar = () => {
         `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${query}?key=939c6c16-c538-4b7c-8ee9-f01f9725a621`
       );
       setWord(response.data);
-      console.log(`WEBSTER RESPONSE: ${word}`)
+      console.log("alert, api call made")
     } catch (e) {
       console.log(e.message);
     }

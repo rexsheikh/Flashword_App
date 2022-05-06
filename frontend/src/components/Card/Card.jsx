@@ -12,13 +12,14 @@ const DeckCard = (props) => {
  const [decks, setDecks] = useState([]);
  const[deckIndex,setDeckIndex] = useState(0)
  console.log(deckIndex)
+//  console.log(decks[0].words[deckIndex].word)
 
 
  useEffect(() => {
   fetchDecks();
   getWord();
     }, [])
-console.log(decks)
+
 
  function handleDefClick(){
      setShowDef("show")
@@ -35,6 +36,7 @@ function handleBadClick(){
 
 function handleNextClick(){
   setDeckIndex(deckIndex + 1)
+  getWord()
 }
 
 const fetchDecks = async () => {
@@ -72,7 +74,7 @@ const fetchDecks = async () => {
   const getWord = async () =>{
     try {
       let response = await axios.get(
-        `http://127.0.0.1:8000/api/decks/get_word/${props.parentDeck[0].words[0].word}/`,
+        `http://127.0.0.1:8000/api/decks/get_word/${props.parentDeck[0].words[deckIndex].word}/`,
         {
           headers: {
             Authorization: 'Bearer ' + token,
@@ -91,11 +93,11 @@ const fetchDecks = async () => {
     return (  
         <div className="card">
             <h1>{props.parentDeck[0].title}</h1>
-            <h2> {props.parentDeck[0].words[0].word}</h2>
+            <h2> {props.parentDeck[0].words[deckIndex].word}</h2>
             <div>
                 <button onClick = {handleDefClick}> Show Definition</button>
             </div>
-            <p className={showDef}> {props.parentDeck[0].words[0].definition}</p>
+            <p className={showDef}> {props.parentDeck[0].words[deckIndex].definition}</p>
             <div> 
              <button onClick = {handleGoodClick} > Good </button>  
             </div>

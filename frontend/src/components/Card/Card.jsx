@@ -9,13 +9,16 @@ const DeckCard = (props) => {
  const [score,setScore] = useState();
  const [user, token] = useAuth();
  const [word,setWord] = useState();
+ const [decks, setDecks] = useState([]);
+ const[deckIndex,setDeckIndex] = useState(0)
+ console.log(deckIndex)
 
 
  useEffect(() => {
-        getWord();
-        // console.log(word.score)
+  fetchDecks();
+  getWord();
     }, [])
-
+console.log(decks)
 
  function handleDefClick(){
      setShowDef("show")
@@ -30,7 +33,23 @@ function handleBadClick(){
   updateWordScore()
 }
 
+function handleNextClick(){
+  setDeckIndex(deckIndex + 1)
+}
 
+const fetchDecks = async () => {
+    try {
+      let response = await axios.get("http://127.0.0.1:8000/api/decks/",{
+        headers: {
+          Authorization: "Bearer " + token
+        },
+      });
+      setDecks(response.data);
+      console.log(`DECKS: ${decks}`)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
  const updateWordScore = async () => {
    let body = {
@@ -85,6 +104,9 @@ function handleBadClick(){
             </div>
             <div> 
              <button> Neutral </button>  
+            </div>
+            <div> 
+             <button onClick = {handleNextClick}> Next Card </button>  
             </div>
         </div>
     );

@@ -9,7 +9,6 @@ const DeckCard = (props) => {
  const [score,setScore] = useState();
  const [user, token] = useAuth();
  const [word,setWord] = useState();
- const [decks, setDecks] = useState([]);
  const[deckIndex,setDeckIndex] = useState(0)
 
 
@@ -37,19 +36,6 @@ function handleNextClick(){
   getWord()
 }
 
-// const fetchDecks = async () => {
-//     try {
-//       let response = await axios.get("http://127.0.0.1:8000/api/decks/",{
-//         headers: {
-//           Authorization: "Bearer " + token
-//         },
-//       });
-//       setDecks(response.data);
-//       console.log(`DECKS: ${decks}`)
-//     } catch (error) {
-//       console.log(error.message)
-//     }
-//   }
 
  const updateWordScore = async () => {
    let body = {

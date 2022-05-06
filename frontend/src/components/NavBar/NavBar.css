@@ -33,3 +33,9 @@ li {
   cursor: pointer;
   font-size: 2rem;
 }
+
+
+.center-nav-cluster{
+  display: flex;
+  align-items: center;
+}

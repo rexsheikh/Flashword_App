@@ -10,5 +10,6 @@ class DeckSerializer(serializers.ModelSerializer):
 
 
 class WordSerializer(serializers.ModelSerializer):
-    model = Word
-    fields = ['deck_id', 'word_id']
+    class Meta:
+        model = Word
+        fields = ['score', 'word', 'definition', 'date_started']

@@ -1,3 +1,4 @@
+from webbrowser import get
 from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.response import Response
@@ -28,19 +29,17 @@ def user_decks(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_word(request, pk):
-    deck = get_object_or_404(Deck, pk=pk)
-    words_set = deck.words.all()
-    print(words_set)
-    serializer = DeckSerializer(deck)
+def get_word(request, word_search):
+    word = Word.objects.get(word=word_search)
+    serializer = WordSerializer(word)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @ api_view(['PATCH'])
 @ permission_classes([IsAuthenticated])
-def update_word(request, pk, scoreUpdate):
-    word = get_object_or_404(Word, pk=pk)
-    word.score += scoreUpdate
+def update_word(request, word_search):
+    word = get_object_or_404(Word, word=word_search)
+    word.score += 1
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()

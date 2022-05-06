@@ -33,7 +33,7 @@ const HomePage = () => {
   
   if(decks.length == 0){
     return(
-      <div> decks loading </div>
+      <div> decks loading... </div>
     )
   }else{
   return (

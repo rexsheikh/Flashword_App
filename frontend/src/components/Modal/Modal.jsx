@@ -11,6 +11,7 @@ const MainModal = () => {
     const[query,setQuery] = useState('')
     const[word,setWord] = useState('')
     const [user, token] = useAuth();
+    console.log(query)
 
     const handleSearch = () =>{
         getWebsterWord();
@@ -50,9 +51,13 @@ const MainModal = () => {
             }}
 
       const addWord = async () => {
+          let body = {
+
+          };
          try {
            let response = await axios.patch(
              `http://127.0.0.1:8000/api/decks/add_word/5/${query}/`,
+             body,
              {
              headers: {
                Authorization: "Bearer " + token
@@ -62,7 +67,23 @@ const MainModal = () => {
            console.log(error.message)
          }
         }
-  
+        // const updateWordScore = async () => {
+        //     let body = {
+        //       score: score
+        //     };
+        //      try {
+        //        let response = await axios.patch(
+        //          `http://127.0.0.1:8000/api/decks/update_word/${word.word}/`,
+        //          body,
+        //          {
+        //          headers: {
+        //            Authorization: "Bearer " + token
+        //          },
+        //        });
+        //      } catch (error) {
+        //        console.log(error.message)
+        //      }
+        //    }
     return (
         <div> 
             <Button variant="primary" onClick={handleShow}>

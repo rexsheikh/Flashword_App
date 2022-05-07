@@ -13,3 +13,7 @@
 .hide{
     color: white;
 }
+
+.button-container{
+    display: flex;
+}

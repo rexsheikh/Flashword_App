@@ -3,6 +3,7 @@ import { useState } from 'react';
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useEffect } from 'react';
+import { Card } from 'react-bootstrap';
 
 const DeckCard = (props) => {
  const [showDef,setShowDef] = useState("hide")
@@ -24,11 +25,13 @@ const DeckCard = (props) => {
 function handleGoodClick(){
   setScore(word.score + 1)
   updateWordScore()
+  setShowDef("hide")
   setDeckIndex(deckIndex + 1)
 }
 function handleBadClick(){
   setScore(word.score -1)
   updateWordScore()
+  setShowDef("hide")
   setDeckIndex(deckIndex + 1)
 
 }
@@ -74,29 +77,47 @@ function handleNextClick(){
     }
   }
 
-
+  // <div className="card">
+  // <h2> {props.parentDecks[0].words[deckIndex].word}</h2>
+  // <div>
+  //     <button onClick = {handleDefClick}> Show Definition</button>
+  // </div>
+  // <p className={showDef}> {props.parentDecks[0].words[deckIndex].definition}</p>
+  // <div> 
+  //  <button onClick = {handleGoodClick} > Good </button>  
+  // </div>
+  // <div> 
+  //  <button onClick = {handleBadClick} > Bad </button>  
+  // </div>
+  // <div> 
+  //  <button> Neutral </button>  
+  // </div>
+  // <div> 
+  //  <button onClick = {handleNextClick}> Next Card </button>  
+  // </div>
   
 
-    return (  
-        <div className="card">
-            <h2> {props.parentDecks[0].words[deckIndex].word}</h2>
-            <div>
-                <button onClick = {handleDefClick}> Show Definition</button>
-            </div>
-            <p className={showDef}> {props.parentDecks[0].words[deckIndex].definition}</p>
-            <div> 
-             <button onClick = {handleGoodClick} > Good </button>  
-            </div>
-            <div> 
-             <button onClick = {handleBadClick} > Bad </button>  
-            </div>
-            <div> 
-             <button> Neutral </button>  
-            </div>
-            <div> 
-             <button onClick = {handleNextClick}> Next Card </button>  
-            </div>
-        </div>
+  return (  
+
+    <Card style={{ width: '18rem' }}>
+      <Card.Body>
+        <Card.Title>{props.parentDecks[0].words[deckIndex].word}</Card.Title>
+        <Card.Subtitle className="mb-2 text-muted">
+          <button onClick = {handleDefClick}> Show Definition</button>
+        </Card.Subtitle>
+        <Card.Text>
+          <p className = {showDef}> {props.parentDecks[0].words[deckIndex].definition} </p>
+        </Card.Text>
+        <Card.Footer>
+          <div className='button-container'>
+          <button onClick = {handleGoodClick} > Good </button>  
+          <button> Neutral </button>  
+          <button onClick = {handleBadClick} > Bad </button>  
+          </div>
+        </Card.Footer>
+      </Card.Body>
+    </Card>
+        
     );
 }
  

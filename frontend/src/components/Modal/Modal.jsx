@@ -11,13 +11,11 @@ const MainModal = () => {
     const[query,setQuery] = useState('')
     const[word,setWord] = useState('')
     const [user, token] = useAuth();
-    console.log(word)
 
     const handleSearch = () =>{
         getWebsterWord();
         createWord();
         addWord();
-
       }
 
     const getWebsterWord = async () =>{
@@ -40,7 +38,7 @@ const MainModal = () => {
         };
             try {
             let response = await axios.post(
-                `http://127.0.0.1:8000/api/decks/words_list`,
+                `http://127.0.0.1:8000/api/decks/words_list/`,
                 body,
                 {
                 headers: {

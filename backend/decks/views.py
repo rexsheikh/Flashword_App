@@ -53,16 +53,14 @@ def get_word(request, word_search):
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def add_word(request, pk, word):
-    response_dict = {}
     deck = get_object_or_404(Deck, pk=pk)
     word = get_object_or_404(Word, word=word)
     deck.words.add(word)
-    response_dict['deck'] = deck.title
-    response_dict['word'] = word.word
-    serializer = DeckSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(response_dict)
+    # serializer = SuperSerializer(super,data=request.data,partial = True)
+    serializer = DeckSerializer(deck, data=request.data, partial=True)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @ api_view(['POST'])

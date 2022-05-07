@@ -38,7 +38,7 @@ const MainModal = () => {
         };
             try {
             let response = await axios.post(
-                `http://127.0.0.1:8000/api/decks/words_list/`,
+                `http://127.0.0.1:8000/api/decks/word_list/`,
                 body,
                 {
                 headers: {

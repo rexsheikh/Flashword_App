@@ -63,16 +63,6 @@ def add_word(request, pk, word):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@ api_view(['POST'])
-@ permission_classes([IsAuthenticated])
-def update_word(request, word_search):
-    word = get_object_or_404(Word, word=word_search)
-    word_serializer = WordSerializer(word, data=request.data, partial=True)
-    if word_serializer.is_valid():
-        word_serializer.save()
-        return Response(word_serializer.data, status=status.HTTP_201_CREATED)
-
-
 @ api_view(['PATCH'])
 @ permission_classes([IsAuthenticated])
 def update_word(request, word_search):

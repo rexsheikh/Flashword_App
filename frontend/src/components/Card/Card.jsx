@@ -24,10 +24,13 @@ const DeckCard = (props) => {
 function handleGoodClick(){
   setScore(word.score + 1)
   updateWordScore()
+  setDeckIndex(deckIndex + 1)
 }
 function handleBadClick(){
   setScore(word.score -1)
   updateWordScore()
+  setDeckIndex(deckIndex + 1)
+
 }
 
 function handleNextClick(){

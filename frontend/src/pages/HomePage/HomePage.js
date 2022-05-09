@@ -2,8 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import Card from "../../components/Card/Card";
+import DeckCard from "../../components/DeckCard/DeckCard";
 import MainModal from "../../components/Modal/Modal";
+import DisplayCards from "../../components/DisplayCards/DisplayCards";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -30,6 +31,8 @@ const HomePage = () => {
     }
   }
 
+  console.log(decks)
+
   
   if(decks.length == 0){
     return(
@@ -38,7 +41,7 @@ const HomePage = () => {
   }else{
   return (
     <div className="container">
-      <Card parentDecks = {decks}/>
+      <DisplayCards parentDecks = {decks}/>
       <MainModal/>
     </div>
   );}

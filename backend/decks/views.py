@@ -44,10 +44,17 @@ def word_list(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_word(request, word_search):
-    if request.method == 'GET':
-        word = Word.objects.get(word=word_search)
-        serializer = WordSerializer(word)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    word = Word.objects.get(word=word_search)
+    serializer = WordSerializer(word)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_deck(request, pk):
+    deck = get_object_or_404(Deck, pk=pk)
+    serializer = DeckSerializer(deck)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['PATCH'])
@@ -65,8 +72,10 @@ def add_word(request, pk, word):
 
 @ api_view(['PATCH'])
 @ permission_classes([IsAuthenticated])
-def update_word(request, word_search):
+def update_word_score(request, word_search, score):
     word = get_object_or_404(Word, word=word_search)
+    print(word.score)
+    word.score += score
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()

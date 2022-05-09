@@ -56,7 +56,7 @@ const MainModal = () => {
           };
          try {
            let response = await axios.patch(
-             `http://127.0.0.1:8000/api/decks/add_word/5/${query}/`,
+             `http://127.0.0.1:8000/api/decks/add_word/6/${query}/`,
              body,
              {
              headers: {
@@ -67,27 +67,11 @@ const MainModal = () => {
            console.log(error.message)
          }
         }
-        // const updateWordScore = async () => {
-        //     let body = {
-        //       score: score
-        //     };
-        //      try {
-        //        let response = await axios.patch(
-        //          `http://127.0.0.1:8000/api/decks/update_word/${word.word}/`,
-        //          body,
-        //          {
-        //          headers: {
-        //            Authorization: "Bearer " + token
-        //          },
-        //        });
-        //      } catch (error) {
-        //        console.log(error.message)
-        //      }
-        //    }
+
     return (
         <div> 
             <Button variant="primary" onClick={handleShow}>
-            Launch demo modal
+            Add Word
             </Button>
 
             <Modal show={show} onHide={handleClose}>

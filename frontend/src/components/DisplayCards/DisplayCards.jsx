@@ -6,11 +6,7 @@ import axios from "axios";
 
 
 const DisplayCards = (props) => {
-  const [score,setScore] = useState();
-  const [user, token] = useAuth();
-  const [word,setWord] = useState();
-  const[deckIndex,setDeckIndex] = useState(0)
-
+  
 
 
 
@@ -21,9 +17,7 @@ const DisplayCards = (props) => {
                     <div>
                         <DeckCard
                         key = {i}
-                        currentWord = {deck.words[deckIndex].word} 
-                        definition = {deck.words[deckIndex].definition}
-                        currentWordScore = {deck.words[deckIndex].score}
+                        deck = {deck}
                         />
                         
                     </div>

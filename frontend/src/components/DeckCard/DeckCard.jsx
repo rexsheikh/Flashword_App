@@ -10,19 +10,23 @@ const DeckCard = (props) => {
  const [score,setScore] = useState();
  const [user, token] = useAuth();
  const [word,setWord] = useState([]);
- const[deckIndex,setDeckIndex] = useState(0)
+ const [index,setIndex] = useState(0);
+ 
+
 
 
  function handleDefClick(){
      setShowDef("show")
  }
 
+
 function handleGoodClick(currentWord,currentWordScore){
   getWord(currentWord)
   setScore(currentWordScore)
   updateWordScore(currentWord,currentWordScore)
   setShowDef("hide")
-  setDeckIndex(deckIndex + 1)
+  setIndex(index + 1)
+  
 }
 
 function handleBadClick(currentWord,currentWordScore){
@@ -30,7 +34,7 @@ function handleBadClick(currentWord,currentWordScore){
   setScore(currentWordScore)
   updateWordScore(currentWord,currentWordScore)
   setShowDef("hide")
-  setDeckIndex(deckIndex + 1)
+  setIndex(index + 1)
 
 }
 
@@ -69,15 +73,15 @@ function handleBadClick(currentWord,currentWordScore){
   }
 
   return (  
-
+    
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{props.currentWord}</Card.Title>
+        <Card.Title>{props.deck.words[index].word}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           <button onClick = {handleDefClick}> Show Definition</button>
         </Card.Subtitle>
         <Card.Text>
-          <p className = {showDef}> {props.definition} </p>
+          <p className = {showDef}> {props.deck.words[index].definition} </p>
         </Card.Text>
           {props.deckId}
         <Card.Text>

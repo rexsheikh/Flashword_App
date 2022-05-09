@@ -88,9 +88,9 @@ function handleBadClick(currentWord,currentWordScore){
         </Card.Text>
         <Card.Footer>
           <div className='button-container'>
-          <button onClick = {() => handleGoodClick(props.currentWord,props.currentWordScore)} > Good </button>  
+          <button onClick = {() => handleGoodClick(props.deck.words[index].word, props.deck.words[index].score)} > Good </button>  
           <button> Neutral </button>  
-          <button onClick = {() => handleBadClick(props.currentWord,props.currentWordScore)} > Bad </button>  
+          <button onClick = {() => handleBadClick(props.deck.words[index].word, props.deck.words[index].score)} > Bad </button>  
           </div>
         </Card.Footer>
       </Card.Body>

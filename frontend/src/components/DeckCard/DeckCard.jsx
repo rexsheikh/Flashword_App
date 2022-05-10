@@ -3,7 +3,8 @@ import { useState } from 'react';
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useEffect } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card,} from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 
 const DeckCard = (props) => {
  const [showDef,setShowDef] = useState("hide")
@@ -73,28 +74,27 @@ function handleBadClick(currentWord,currentWordScore){
   }
 
   return (  
-    
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>{props.deck.words[index].word}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">
-          <button onClick = {handleDefClick}> Show Definition</button>
-        </Card.Subtitle>
-        <Card.Text>
-          <p className = {showDef}> {props.deck.words[index].definition} </p>
-        </Card.Text>
-          {props.deckId}
-        <Card.Text>
-        </Card.Text>
-        <Card.Footer>
-          <div className='button-container'>
-          <button onClick = {() => handleGoodClick(props.deck.words[index].word, props.deck.words[index].score)} > Good </button>  
-          <button> Neutral </button>  
-          <button onClick = {() => handleBadClick(props.deck.words[index].word, props.deck.words[index].score)} > Bad </button>  
+      <div className="row">
+          <Card variant = "main" style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace"}}>
+              <Card.Body>
+                <Card.Title>{props.deck.words[index].word}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">
+                    <button className = "card-button" onClick = {handleDefClick}> Show Definition</button>
+                </Card.Subtitle>
+                <Card.Text>
+                  <p className = {showDef}> {props.deck.words[index].definition} </p>
+                </Card.Text>
+                  {props.deckId}
+                <Card.Text>
+                </Card.Text>
+                <Card.Footer>
+                      <button className='card-button' onClick = {() => handleGoodClick(props.deck.words[index].word, props.deck.words[index].score)} > Good </button>  
+                      <button className='card-button'> Neutral </button>  
+                      <button className='card-button' onClick = {() => handleBadClick(props.deck.words[index].word, props.deck.words[index].score)} > Bad </button> 
+                </Card.Footer>
+              </Card.Body>
+            </Card>
           </div>
-        </Card.Footer>
-      </Card.Body>
-    </Card>
         
     );
 }

@@ -3,9 +3,21 @@
 }
 
 .hide{
-    color: white;
+    color: #EFEAD8;
 }
 
 .button-container{
     display: flex;
+    border: none !important;
 }
+
+.card-button{
+    background-color: #6D8B74;
+    color: black;
+    font-size: small;
+    border-radius: 20px;
+    border: none;
+}
+
+
+

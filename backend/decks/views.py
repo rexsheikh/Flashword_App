@@ -74,7 +74,6 @@ def add_word(request, pk, word):
 @ permission_classes([IsAuthenticated])
 def update_word_score(request, word_search, score):
     word = get_object_or_404(Word, word=word_search)
-    print(word.score)
     word.score += score
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():

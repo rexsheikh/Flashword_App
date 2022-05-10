@@ -1,9 +1,6 @@
 import DeckCard from "../DeckCard/DeckCard";
 import '../DeckCard/DeckCard.css'
-import { useState,useEffect } from 'react';
-import useAuth from "../../hooks/useAuth";
-import axios from "axios";
-
+import { Container,Row,Col } from "react-bootstrap";
 
 const DisplayCards = (props) => {
   
@@ -11,21 +8,21 @@ const DisplayCards = (props) => {
 
 
     return ( 
-        <div>
+        <Container>
+          <Row>
             {props.parentDecks.map((deck,i) => {
                 return (
-                    <div>
+                    <Col>
                         <DeckCard
                         key = {i}
                         deck = {deck}
                         />
-                        
-                    </div>
+                    </Col>
                     
                 )
             })}
-            
-        </div>
+            </Row>
+        </Container>
      );
 }
  

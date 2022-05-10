@@ -1,0 +1,7 @@
+.hide{
+    z-index: -100;
+}
+
+.show{
+    z-index: 1000;
+}

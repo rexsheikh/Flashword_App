@@ -91,7 +91,7 @@ function handleAgainClick(currentWord,currentWordScore){
 
   return (  
   <div className="title-example">
-    <Card style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace"}}>
+    <Card style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace",position:"absolute",zIndex:"0"}}>
         <Card.Body>
           <Card.Title>{props.deck.words[index].word}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">

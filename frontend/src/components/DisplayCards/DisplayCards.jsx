@@ -15,7 +15,9 @@ const DisplayCards = (props) => {
             {props.parentDecks.map((deck,i) => {
                 return (
                     <Col style = {{position:"relative"}}>
-                        <TitleCard/>
+                        <TitleCard
+                        deck = {deck}
+                        />
                         <DeckCard
                         key = {i}
                         deck = {deck}

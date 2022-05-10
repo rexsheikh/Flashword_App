@@ -5,10 +5,11 @@ import { Container,Row,Col } from "react-bootstrap";
 
 
 const DisplayCards = (props) => {
-  
 
-
-
+    console.log(props.parentDecks)
+    const words = props.parentDecks.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
+    console.log(words)
+    
     return ( 
         <Container style = {{height:"400px"}}>
           <Row>

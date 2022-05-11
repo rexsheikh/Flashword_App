@@ -6,12 +6,22 @@ import { useEffect } from 'react';
 import { Card} from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
 
+
 const DeckCard = (props) => {
  const [showDef,setShowDef] = useState("hide")
  const [score,setScore] = useState();
  const [user, token] = useAuth();
  const [word,setWord] = useState([]);
  const [index,setIndex] = useState(0);
+
+let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+today = today.toString()
+console.log(typeof(today))
  
 
 
@@ -21,18 +31,20 @@ const DeckCard = (props) => {
  }
 
 
-function handleGoodClick(currentWord,currentWordScore){
+function handleGoodClick(currentWord,currentWordScore,today){
   getWord(currentWord)
   setScore(currentWordScore + 1)
   updateWordScore(currentWord,currentWordScore)
+  updateWordReviews(currentWord,today)
   setShowDef("hide")
   setIndex(index + 1)
   
 }
-function handleEasyClick(currentWord,currentWordScore){
+function handleEasyClick(currentWord,currentWordScore,today){
   getWord(currentWord)
   setScore(currentWordScore + 2)
   updateWordScore(currentWord,currentWordScore)
+  updateWordReviews(currentWord,today)
   setShowDef("hide")
   setIndex(index + 1)
   
@@ -63,6 +75,22 @@ function handleAgainClick(currentWord,currentWordScore){
     try {
       let response = await axios.patch(
         `http://127.0.0.1:8000/api/decks/update_word_score/${currentWord}/${currentWordScore}/`, body,
+        {
+        headers: {
+          Authorization: "Bearer " + token
+        },
+      });
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+ const updateWordReviews = async (currentWord,today) => {
+   let body = {
+
+   }
+    try {
+      let response = await axios.patch(
+        `http://127.0.0.1:8000/api/decks/update_word_reviews/${currentWord}/${today}/`, body,
         {
         headers: {
           Authorization: "Bearer " + token
@@ -107,7 +135,7 @@ function handleAgainClick(currentWord,currentWordScore){
             <button className='card-button' onClick = {() => handleAgainClick(props.deck.words[index].word, props.deck.words[index].score)} > Again </button>  
             <button className='card-button' onClick = {() => handleHardClick(props.deck.words[index].word, props.deck.words[index].score)} > Hard </button>  
             <button className='card-button' onClick = {() => handleGoodClick(props.deck.words[index].word, props.deck.words[index].score)} > Good </button>   
-            <button className='card-button' onClick = {() => handleEasyClick(props.deck.words[index].word, props.deck.words[index].score)} > Easy </button> 
+            <button className='card-button' onClick = {() => handleEasyClick(props.deck.words[index].word, props.deck.words[index].score,today)} > Easy </button> 
           </Card.Footer>
         </Card.Body>
       </Card>

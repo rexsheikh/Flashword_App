@@ -90,13 +90,11 @@ def update_word_reviews(request, word_search, date_search):
         date = dates.get(date=date_search)
         date.reviews += 1
         date.save()
-        print("yes")
     except ObjectDoesNotExist:
         new_date = word.dates.create(date=date_search)
         new_date.reviews += 1
         new_date.save()
         print(new_date)
-        print("no")
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()

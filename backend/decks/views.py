@@ -82,19 +82,20 @@ def update_word_score(request, word_search, score):
 
 @ api_view(['PATCH'])
 @ permission_classes([IsAuthenticated])
-def update_word_reviews(request, word_search, date):
+def update_word_reviews(request, word_search, date_search):
     word = get_object_or_404(Word, word=word_search)
-    dates = get_list_or_404(Date, date=date)
-    date = dates[0]
-    word.dates.add(date)
+    dates = word.dates.all()
+    date = dates.get(date=date_search)
+    date.reviews += 1
+    date.save()
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()
         return Response(word_serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@ api_view(['GET', 'POST'])
+@ permission_classes([IsAuthenticated])
 def word_list(request):
     if request.method == 'GET':
         words = Word.objects.all()
@@ -107,8 +108,8 @@ def word_list(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@ api_view(['GET', 'POST'])
+@ permission_classes([IsAuthenticated])
 def date_list(request):
     if request.method == 'GET':
         dates = Date.objects.all()

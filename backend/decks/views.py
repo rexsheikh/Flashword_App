@@ -7,6 +7,7 @@ from .models import Deck, Word, Date
 from .serializers import DeckSerializer, WordSerializer, DateSerializer
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import date
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -127,3 +128,12 @@ def date_list(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@ api_view(['GET'])
+@ permission_classes([IsAuthenticated])
+def review_average(request):
+    custom_dict = {}
+    dates = Date.objects.all().aggregate(Avg('reviews'))
+    custom_dict['total'] = dates
+    return Response(custom_dict)

@@ -14,4 +14,5 @@ urlpatterns = [
     path('date_list/', views.date_list),
     path('update_word_reviews/<str:word_search>/<str:date_search>/',
          views.update_word_reviews),
+    path('review_average/', views.review_average),
 ]

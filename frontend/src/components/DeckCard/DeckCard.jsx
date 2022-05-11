@@ -21,7 +21,6 @@ let yyyy = today.getFullYear();
 
 today = yyyy + '-' + mm + '-' + dd;
 today = today.toString()
-console.log(typeof(today))
  
 
 
@@ -50,18 +49,20 @@ function handleEasyClick(currentWord,currentWordScore,today){
   
 }
 
-function handleHardClick(currentWord,currentWordScore){
+function handleHardClick(currentWord,currentWordScore,today){
   getWord(currentWord)
   setScore(currentWordScore -1)
   updateWordScore(currentWord,currentWordScore)
+  updateWordReviews(currentWord,today)
   setShowDef("hide")
   setIndex(index + 1)
 
 }
-function handleAgainClick(currentWord,currentWordScore){
+function handleAgainClick(currentWord,currentWordScore,today){
   getWord(currentWord)
   setScore(currentWordScore -2)
   updateWordScore(currentWord,currentWordScore)
+  updateWordReviews(currentWord,today)
   setShowDef("hide")
   setIndex(index + 1)
 
@@ -132,9 +133,9 @@ function handleAgainClick(currentWord,currentWordScore){
           <Card.Text>
           </Card.Text>
           <Card.Footer>
-            <button className='card-button' onClick = {() => handleAgainClick(props.deck.words[index].word, props.deck.words[index].score)} > Again </button>  
-            <button className='card-button' onClick = {() => handleHardClick(props.deck.words[index].word, props.deck.words[index].score)} > Hard </button>  
-            <button className='card-button' onClick = {() => handleGoodClick(props.deck.words[index].word, props.deck.words[index].score)} > Good </button>   
+            <button className='card-button' onClick = {() => handleAgainClick(props.deck.words[index].word, props.deck.words[index].score,today)} > Again </button>  
+            <button className='card-button' onClick = {() => handleHardClick(props.deck.words[index].word, props.deck.words[index].score,today)} > Hard </button>  
+            <button className='card-button' onClick = {() => handleGoodClick(props.deck.words[index].word, props.deck.words[index].score,today)} > Good </button>   
             <button className='card-button' onClick = {() => handleEasyClick(props.deck.words[index].word, props.deck.words[index].score,today)} > Easy </button> 
           </Card.Footer>
         </Card.Body>

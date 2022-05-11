@@ -1,90 +1,100 @@
+// const words = props.parentDecks.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
+// const flat = words.flat(Infinity)
+// function getDateArray(arr = flat){
+//     let res = [];
+//     for(let i = 0; i < arr.length; i++){
+//         res.push([new Date(arr[i])])
+//     }
+//     return res
+// }
+
 import { useEffect } from 'react';
 import { Chart } from 'react-google-charts';
-    // function packageData(arr){
-    //     let words;
-    //     let flat; 
-    //     let res = [];
-    //     words = arr.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
-    //     flat = words.flat(Infinity)
-
-
-    // let test = packageData(props.parentDecks)
-    // console.log(test)
-    // const words = props.parentDecks.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
-    // const flat = words.flat(Infinity)
-
-    // console.log(new Date(flat[0]))
-    // function packageData(arr){
-    //     let res = []
-    //     for(let i = 0; i < arr.length; i++){
-    //         res.push([new Date(arr[i])])
-    //     }
-    //     return res
-    // }
-    // let test
-    // test = packageData(flat)
-    // console.log(test)
-
-//     <Card.Body>
-//     <Chart stye = {{zIndex:"100", position:"absolute"}}
-//     chartType="Calendar"
-//     width="100%"
-//     height="400px"
-//     data = {data}
-//     />
-// </Card.Body>
-
-// let data = [
-//     [
-//       {
-//         type: "date",
-//         id: "Date",
-//       },
-//       {
-//         type: "number",
-//         id: "Won/Loss",
-//       },
-//     ],
-//     [new Date(2013, 0, 4), 38177],
-//     [new Date(2013, 0, 5), 38705],
-//     [new Date(2013, 0, 12), 38210],
-//     [new Date(2013, 0, 13), 38029],
-//     [new Date(2013, 0, 19), 38823],
-//     [new Date(2013, 0, 23), 38345],
-//     [new Date(2013, 0, 24), 38436],
-//     [new Date(2013, 0, 30), 38447],
-//   ];
+import { useState } from 'react'
+import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
 
 
 const Calendar = (props) => {
 
+    const [user, token] = useAuth();
+    const[dates,setDates] = useState()
+
     useEffect(() => {
+        getDates();
+      }, [token]);
 
+const getDates = async () =>{
+    try {
+      let response = await axios.get(
+        `http://127.0.0.1:8000/api/decks/date_list/`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+      setDates(response.data);
+    } catch (e) {
+      console.log(e.message);
     }
-);
-const words = props.parentDecks.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
-const flat = words.flat(Infinity)
-console.log(flat)
-function getDateArray(arr = flat){
-    let res = [];
-    for(let i = 0; i < arr.length; i++){
-        res.push([new Date(arr[i])])
-    }
-    return res
+  }
+
+
+ console.log(dates)
+ let sampleDate = dates[4].date
+ let new_date = sampleDate.split('-')
+ function ints(arr){
+     let res = []
+    for(let i = 0; i < new_date.length; i++){
+     res.push(parseInt(new_date[i]))
+ }
+ return res
 }
-
- let dateArray = getDateArray(flat)
- console.log(dateArray)
-
-
+let int_list = ints(new_date)
+console.log(int_list)
+let res = new Date (int_list[0],int_list[1],int_list[2])
 
 
 
-    return (  
-        <div>
-            <h1>CALENDAR</h1>
-        </div>
-    );
-}
+
+let data = [
+    [
+      {
+        type: "date",
+        id: "Date",
+      },
+      {
+        type: "number",
+        id: "Won/Loss",
+      },
+    ],
+    [new Date(2022, 2, 4), 10],
+    [new Date(2022, 2, 5), 11],
+    [new Date(2022, 2, 12),0],
+    [new Date(2022, 2, 13),9],
+    [new Date(2022, 2, 19),3],
+    [new Date(2022, 2, 23),5],
+    [new Date(2022, 2, 24),6],
+    [new Date(2022, 2, 30),7],
+    [new Date(2022,3,10),5],
+    [res,10]
+  ];
+
+
+
+
  
+    return (  
+    <div>
+        <Chart
+        chartType="Calendar"
+        width="100%"
+        height="400px"
+        data= {data}
+        />
+    </div>
+    );
+
+    }
 export default Calendar;

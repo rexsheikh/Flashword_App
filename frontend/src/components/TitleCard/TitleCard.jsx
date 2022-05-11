@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import { Chart } from 'react-google-charts';
 

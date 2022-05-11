@@ -5,6 +5,7 @@ import axios from "axios";
 import DeckCard from "../../components/DeckCard/DeckCard";
 import MainModal from "../../components/Modal/Modal";
 import DisplayCards from "../../components/DisplayCards/DisplayCards";
+import Calendar from "../../components/Calendar/Calendar";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -31,7 +32,6 @@ const HomePage = () => {
     }
   }
 
-  console.log(decks)
 
   
   if(decks.length == 0){
@@ -43,6 +43,7 @@ const HomePage = () => {
     <div className="container">
       <DisplayCards parentDecks = {decks}/>
       <MainModal/>
+      <Calendar parentDecks = {decks}/>
     </div>
   );}
 };

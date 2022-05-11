@@ -41,19 +41,37 @@ const getDates = async () =>{
   }
 
 
- console.log(dates)
- let sampleDate = dates[4].date
- let new_date = sampleDate.split('-')
- function ints(arr){
-     let res = []
-    for(let i = 0; i < new_date.length; i++){
-     res.push(parseInt(new_date[i]))
- }
- return res
+function scoreAgg(arr){
+    let dict = {};
+    for(let i = 0; i < arr.length; i++){
+        if(!dict[arr[i].date]){
+            dict[arr[i].date] = arr[i].reviews
+        }else{
+            dict[arr[i].date] += arr[i].reviews
+        }
+    }
+    return dict  
 }
-let int_list = ints(new_date)
-console.log(int_list)
-let res = new Date (int_list[0],int_list[1],int_list[2])
+
+let test = scoreAgg(dates)
+console.log(test)
+
+
+//  console.log(dates)
+//  let sampleDate = dates[4].date
+//  let new_date = sampleDate.split('-')
+//  function ints(arr){
+//      let res = []
+//     for(let i = 0; i < new_date.length; i++){
+//      res.push(parseInt(new_date[i]))
+//  }
+//  return res
+// }
+// let int_list = ints(new_date)
+// console.log(int_list)
+// let res = new Date (int_list[0],int_list[1],int_list[2])
+
+console.log(dates)
 
 
 
@@ -78,7 +96,6 @@ let data = [
     [new Date(2022, 2, 24),6],
     [new Date(2022, 2, 30),7],
     [new Date(2022,3,10),5],
-    [res,10]
   ];
 
 

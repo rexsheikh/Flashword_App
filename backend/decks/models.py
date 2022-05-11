@@ -4,6 +4,7 @@ from authentication.models import User
 
 class Date(models.Model):
     date = models.DateField(auto_now=False)
+    reviews = models.IntegerField(default=0)
 
 
 class Word(models.Model):

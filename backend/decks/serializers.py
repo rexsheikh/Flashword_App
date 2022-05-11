@@ -18,4 +18,4 @@ class WordSerializer(serializers.ModelSerializer):
 class DateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Date
-        fields = ['date']
+        fields = ['date', 'reviews']

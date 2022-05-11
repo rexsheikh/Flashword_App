@@ -79,3 +79,16 @@ def update_word_score(request, word_search, score):
     if word_serializer.is_valid():
         word_serializer.save()
         return Response(word_serializer.data, status=status.HTTP_201_CREATED)
+
+# @ api_view(['PATCH'])
+# @ permission_classes([IsAuthenticated])
+# def update_word_review(request, word_search, ):
+#     word = get_object_or_404(Word, word=word_search)
+#     word.score += score
+#     word_serializer = WordSerializer(word, data=request.data, partial=True)
+#     if word_serializer.is_valid():
+#         word_serializer.save()
+#         return Response(word_serializer.data, status=status.HTTP_201_CREATED)
+
+# get word. look for duplicate dates (today). if no duplicate dates, reviews + 1. else, reviews +=1 for word.
+# top level. aggregate all dates and their reviews. drop in google react chart.

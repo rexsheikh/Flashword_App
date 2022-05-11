@@ -1,10 +1,11 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import Deck, Word, Date
 from .serializers import DeckSerializer, WordSerializer, DateSerializer
+import datetime
 
 # Create your views here.
 
@@ -79,6 +80,19 @@ def update_word_score(request, word_search, score):
         return Response(word_serializer.data, status=status.HTTP_201_CREATED)
 
 
+@ api_view(['PATCH'])
+@ permission_classes([IsAuthenticated])
+def update_word_reviews(request, word_search, date):
+    word = get_object_or_404(Word, word=word_search)
+    dates = get_list_or_404(Date, date=date)
+    date = dates[0]
+    word.dates.add(date)
+    word_serializer = WordSerializer(word, data=request.data, partial=True)
+    if word_serializer.is_valid():
+        word_serializer.save()
+        return Response(word_serializer.data, status=status.HTTP_201_CREATED)
+
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def word_list(request):
@@ -101,7 +115,7 @@ def date_list(request):
         serializer = DateSerializer(dates, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        serializer = WordSerializer(data=request.data)
+        serializer = DateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

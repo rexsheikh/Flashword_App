@@ -5,7 +5,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import Deck, Word, Date
 from .serializers import DeckSerializer, WordSerializer, DateSerializer
-import datetime
+from django.core.exceptions import ObjectDoesNotExist
+from datetime import date
 
 # Create your views here.
 
@@ -85,9 +86,17 @@ def update_word_score(request, word_search, score):
 def update_word_reviews(request, word_search, date_search):
     word = get_object_or_404(Word, word=word_search)
     dates = word.dates.all()
-    date = dates.get(date=date_search)
-    date.reviews += 1
-    date.save()
+    try:
+        date = dates.get(date=date_search)
+        date.reviews += 1
+        date.save()
+        print("yes")
+    except ObjectDoesNotExist:
+        new_date = word.dates.create(date=date_search)
+        new_date.reviews += 1
+        new_date.save()
+        print(new_date)
+        print("no")
     word_serializer = WordSerializer(word, data=request.data, partial=True)
     if word_serializer.is_valid():
         word_serializer.save()
@@ -120,24 +129,3 @@ def date_list(request):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-# post a new date to the dates list
-# add that date object to the words object .add(date)
-#
-
-
-# @ api_view(['PATCH'])
-# @ permission_classes([IsAuthenticated])
-# def update_word_review(request, word_search, ):
-#     word = get_object_or_404(Word, word=word_search)
-#     word.score += score
-#     word_serializer = WordSerializer(word, data=request.data, partial=True)
-#     if word_serializer.is_valid():
-#         word_serializer.save()
-#         return Response(word_serializer.data, status=status.HTTP_201_CREATED)
-
-# get word. look for duplicate dates (today). if no duplicate dates, reviews + 1. else, reviews +=1 for word.
-# top level. aggregate all dates and their reviews. drop in google react chart.
-
-# when is the date added?

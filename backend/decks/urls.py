@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_word/<int:pk>/<str:word>/', views.add_word),
     path('word_list/', views.word_list),
     path('get_deck/<int:pk>/', views.get_deck),
+    path('date_list/', views.date_list),
 ]

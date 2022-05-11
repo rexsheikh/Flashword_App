@@ -1,11 +1,10 @@
-from webbrowser import get
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
-from .models import Deck, Word
-from .serializers import DeckSerializer, WordSerializer
+from .models import Deck, Word, Date
+from .serializers import DeckSerializer, WordSerializer, DateSerializer
 
 # Create your views here.
 
@@ -63,7 +62,6 @@ def add_word(request, pk, word):
     deck = get_object_or_404(Deck, pk=pk)
     word = get_object_or_404(Word, word=word)
     deck.words.add(word)
-    # serializer = SuperSerializer(super,data=request.data,partial = True)
     serializer = DeckSerializer(deck, data=request.data, partial=True)
     serializer.is_valid(raise_exception=True)
     serializer.save()
@@ -80,6 +78,40 @@ def update_word_score(request, word_search, score):
         word_serializer.save()
         return Response(word_serializer.data, status=status.HTTP_201_CREATED)
 
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def word_list(request):
+    if request.method == 'GET':
+        words = Word.objects.all()
+        serializer = WordSerializer(words, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = WordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def date_list(request):
+    if request.method == 'GET':
+        dates = Date.objects.all()
+        serializer = DateSerializer(dates, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = WordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+# post a new date to the dates list
+# add that date object to the words object .add(date)
+#
+
+
 # @ api_view(['PATCH'])
 # @ permission_classes([IsAuthenticated])
 # def update_word_review(request, word_search, ):
@@ -92,3 +124,5 @@ def update_word_score(request, word_search, score):
 
 # get word. look for duplicate dates (today). if no duplicate dates, reviews + 1. else, reviews +=1 for word.
 # top level. aggregate all dates and their reviews. drop in google react chart.
+
+# when is the date added?

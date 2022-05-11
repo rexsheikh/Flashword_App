@@ -64,6 +64,7 @@ const Calendar = (props) => {
 );
 const words = props.parentDecks.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
 const flat = words.flat(Infinity)
+console.log(flat)
 function getDateArray(arr = flat){
     let res = [];
     for(let i = 0; i < arr.length; i++){

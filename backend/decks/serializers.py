@@ -12,7 +12,8 @@ class DeckSerializer(serializers.ModelSerializer):
 class WordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Word
-        fields = ['score', 'word', 'definition', 'date_started']
+        fields = ['score', 'word', 'definition', 'date_started', 'dates']
+        depth = 1
 
 
 class DateSerializer(serializers.ModelSerializer):

@@ -20,7 +20,7 @@ const MainModal = (props) => {
         getWebsterWord();
         createWord();
         addWord(currentTitle);
-        fetchDecks();
+        fetchDecks()
       }
 
     const getWebsterWord = async () =>{
@@ -35,24 +35,25 @@ const MainModal = (props) => {
         }
         }
 
-    const createWord = async () => {
-        let body = {
-            score: 0,
-            word: query,
-            definition: word[0].shortdef[0]
-        };
-            try {
-            let response = await axios.post(
-                `http://127.0.0.1:8000/api/decks/word_list/`,
-                body,
-                {
-                headers: {
-                Authorization: "Bearer " + token
-                },
-            });
-            } catch (error) {
-            console.log(error.message)
-            }}
+        const createWord = async () => {
+            let body = {
+                score: 0,
+                word: query,
+                definition: word[0].shortdef[0]
+            };
+                try {
+                let response = await axios.post(
+                    `http://127.0.0.1:8000/api/decks/word_list/`,
+                    body,
+                    {
+                    headers: {
+                    Authorization: "Bearer " + token
+                    },
+                }
+                );
+                } catch (error) {
+                console.log(error.message)
+                }}
 
       const addWord = async (currentTitle) => {
           let body = {

@@ -21,7 +21,7 @@ const DeleteDeck = (props) => {
     const deleteDeck = async (currentTitle) => {
             try {
             let response = await axios.delete(
-                `http://127.0.0.1:8000/api/decks/delete_deck/${currentTitle}`,
+                `http://127.0.0.1:8000/api/decks/delete_deck/${currentTitle}/`,
                 {
                 headers: {
                 Authorization: "Bearer " + token

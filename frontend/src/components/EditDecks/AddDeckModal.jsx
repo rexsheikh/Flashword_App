@@ -11,8 +11,6 @@ const AddDeck = () => {
     const [user, token] = useAuth();
     const [title,setTitle] = useState()
 
-  
-
     const handleEntry = () =>{
         createDeck()
       }
@@ -20,8 +18,9 @@ const AddDeck = () => {
 
     const createDeck = async () => {
         let body = {
-            user: user.name,
+            user: user.username,
             title: title,
+            deck_streak: 0,
         };
             try {
             let response = await axios.post(

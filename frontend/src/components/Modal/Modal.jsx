@@ -77,19 +77,19 @@ const MainModal = (props) => {
             </Button>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Search for a word...</Modal.Title>
+                <Modal.Header style = {{backgroundColor:"#D0C9C0"}}closeButton>
+                    <Modal.Title >Add a word!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style = {{backgroundColor:"#D0C9C0"}}>
 
                 <li>
                     <input type = "text"
                     onChange={(e) => setQuery(e.target.value)}
                     />
-                    <button type="submit" onClick = {() => handleSearch(props.title)}>submit</button>
+                    <button style = {{backgroundColor:'#6D8B74', border:"none", color:"white", marginLeft:"5.8rem"}} type="submit" onClick = {() => handleSearch(props.title)}>submit</button>
               </li>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style = {{backgroundColor:"#D0C9C0"}}>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>

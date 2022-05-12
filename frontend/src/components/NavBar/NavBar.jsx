@@ -25,7 +25,7 @@ const Navbar = () => {
         </li>
         <li>
           <AddDeck/>
-      </li>
+         </li>
         <li>
           {user ? (
             <button style = {{backgroundColor:"#6D8B74", borderRadius:"20px", border:"10px", fontFamily: "Roboto Mono, monospace", marginTop:"17px"}} onClick={logoutUser}>Logout</button>

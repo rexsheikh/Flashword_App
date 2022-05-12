@@ -40,7 +40,7 @@ const HomePage = () => {
     )
   }else{
   return (
-    <div style = {{backgroundColor:"#5F7161",border:"2px solid white",paddingTop:"2rem"}}>
+    <div style = {{backgroundColor:"#5F7161",border:"2px solid white",paddingTop:"2rem",height:"100vh"}}>
       <DisplayCards parentDecks = {decks}/>
       <MainModal/>
       <Calendar parentDecks = {decks}/>

@@ -3,7 +3,7 @@ from authentication.models import User
 
 
 class Date(models.Model):
-    date = models.DateField(auto_now=True)
+    date = models.DateField()
     reviews = models.IntegerField(default=0)
 
 

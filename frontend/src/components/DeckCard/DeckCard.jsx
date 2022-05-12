@@ -43,7 +43,6 @@ function handleGoodClick(currentWord,currentWordScore,today){
   }else{
   setIndex(index + 1)
   }
-  
 }
 function handleEasyClick(currentWord,currentWordScore,today){
   getWord(currentWord)
@@ -51,8 +50,11 @@ function handleEasyClick(currentWord,currentWordScore,today){
   updateWordScore(currentWord,currentWordScore)
   updateWordReviews(currentWord,today)
   setShowDef("hide")
-  setIndex(index + 1)
-  
+  if(props.deck.words.length === index +1){
+    setIndex(0)
+  }else{
+  setIndex(index + 1)  
+}
 }
 
 function handleHardClick(currentWord,currentWordScore,today){
@@ -61,8 +63,11 @@ function handleHardClick(currentWord,currentWordScore,today){
   updateWordScore(currentWord,currentWordScore)
   updateWordReviews(currentWord,today)
   setShowDef("hide")
-  setIndex(index + 1)
-
+  if(props.deck.words.length === index +1){
+    setIndex(0)
+  }else{
+  setIndex(index + 1)  
+}
 }
 function handleAgainClick(currentWord,currentWordScore,today){
   getWord(currentWord)
@@ -70,8 +75,11 @@ function handleAgainClick(currentWord,currentWordScore,today){
   updateWordScore(currentWord,currentWordScore)
   updateWordReviews(currentWord,today)
   setShowDef("hide")
-  setIndex(index + 1)
-
+  if(props.deck.words.length === index +1){
+    setIndex(0)
+  }else{
+  setIndex(index + 1)  
+}
 }
 
 
@@ -123,6 +131,8 @@ function handleAgainClick(currentWord,currentWordScore,today){
       console.log(e.message);
     }
   }
+
+  
 
   return (  
   <div >

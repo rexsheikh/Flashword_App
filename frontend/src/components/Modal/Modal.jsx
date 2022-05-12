@@ -11,6 +11,7 @@ const MainModal = (props) => {
     const[query,setQuery] = useState('')
     const[word,setWord] = useState('')
     const [user, token] = useAuth();
+    const [decks, setDecks] = useState([]);
     console.log(query)
     console.log(word)
 
@@ -19,6 +20,7 @@ const MainModal = (props) => {
         getWebsterWord();
         createWord();
         addWord(currentTitle);
+        fetchDecks();
       }
 
     const getWebsterWord = async () =>{
@@ -69,7 +71,18 @@ const MainModal = (props) => {
            console.log(error.message)
          }
         }
-
+        const fetchDecks = async () => {
+            try {
+              let response = await axios.get("http://127.0.0.1:8000/api/decks/",{
+                headers: {
+                  Authorization: "Bearer " + token
+                },
+              });
+              setDecks(response.data);
+            } catch (error) {
+              console.log(error.message)
+            }
+          }
     return (
         <div> 
             <Button variant="primary" onClick={handleShow} style = {{backgroundColor:'#6D8B74', border:"none"}}>

@@ -42,9 +42,6 @@ function scoreAgg(arr){
     }
     return dict  
 }
-
-
-
 function formatDates(str){
 let res = []
 let lst = str.split('-')
@@ -53,7 +50,6 @@ for(let i = 0; i < lst.length; i++){
 }
 return new Date (res[0],res[1],res[2])
 }
-
 function packageData(arr){
     let container = []
     let headers =     [
@@ -77,7 +73,15 @@ function packageData(arr){
     return container
 }
  
-let data = packageData(dates)
+// const data = packageData(dates)
+// <Chart
+// chartType="Calendar"
+// width="100%"
+// height="400px"
+// data = {data}
+// options = {options}
+// />
+
 let options = {
   calendar: {
     dayOfWeekLabel: {
@@ -91,18 +95,12 @@ let options = {
 
 
 
- 
-    return (  
-    <div style = {{backgroundColor:"#5F7161"}}>
-        <Chart
-    chartType="Calendar"
-    width="100%"
-    height="400px"
-    data = {data}
-    options = {options}
-    />
-    </div>
-    );
+      return (  
+      <div style = {{backgroundColor:"#5F7161"}}>
 
+
+      </div>
+      );
+      
     }
 export default Calendar;

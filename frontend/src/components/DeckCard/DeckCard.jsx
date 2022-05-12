@@ -31,12 +31,18 @@ today = today.toString()
 
 
 function handleGoodClick(currentWord,currentWordScore,today){
+  console.log(props.deck)
+  console.log(props.deck.words.length)
   getWord(currentWord)
   setScore(currentWordScore + 1)
   updateWordScore(currentWord,currentWordScore)
   updateWordReviews(currentWord,today)
   setShowDef("hide")
+  if(props.deck.words.length === index +1){
+    setIndex(0)
+  }else{
   setIndex(index + 1)
+  }
   
 }
 function handleEasyClick(currentWord,currentWordScore,today){

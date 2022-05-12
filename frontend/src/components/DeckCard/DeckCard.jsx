@@ -2,10 +2,8 @@ import './DeckCard.css'
 import { useState } from 'react';
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import { useEffect } from 'react';
 import { Card} from 'react-bootstrap';
-import { Badge } from 'react-bootstrap';
-import { propTypes } from 'react-bootstrap/esm/Image';
+import DeleteDeck from '../EditDecks/DeleteDeckModal';
 
 
 const DeckCard = (props) => {

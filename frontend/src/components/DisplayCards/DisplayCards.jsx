@@ -11,7 +11,6 @@ const DisplayCards = (props) => {
           <Row>
             {props.parentDecks.map((deck,i) => {
                 if(deck.words.length === 0){
-                    i--;
                     return(
                         <TitleCard
                         deck = {deck}

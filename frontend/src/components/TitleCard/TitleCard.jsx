@@ -15,10 +15,12 @@ const TitleCard = (props) => {
     return ( 
         <div>
             <Card style = {{position:"absolute", zIndex:`${showTitle}`,width:"300px",height:"300px",border:"nond",width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace"}}>
-                <DeleteDeck title = {props.deck.title}/>
-                <MainModal title = {props.deck.title}/>
+                <ul>
+                    <li style = {{marginRight:"6rem",paddingLeft:"0"}}> <DeleteDeck title = {props.deck.title}/></li>
+                    <li> <MainModal title = {props.deck.title}/></li>
+                </ul>
                 <h2> {props.deck.title} </h2>
-                <button onClick = {handleClick}> Click to Start </button>
+                <button style = {{backgroundColor:'#6D8B74', border:"none", color:"white", marginLeft:"5.8rem"}}onClick = {handleClick}> Click to Start </button>
             </Card>
             <div>
 

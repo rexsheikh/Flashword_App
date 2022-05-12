@@ -12,6 +12,8 @@ const MainModal = (props) => {
     const[word,setWord] = useState('')
     const [user, token] = useAuth();
     console.log(query)
+    console.log(word)
+
 
     const handleSearch = (currentTitle) =>{
         getWebsterWord();

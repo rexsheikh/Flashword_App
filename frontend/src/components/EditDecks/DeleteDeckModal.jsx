@@ -42,20 +42,18 @@ const DeleteDeck = (props) => {
             </Button>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header style = {{backgroundColor:"#D0C9C0"}} closeButton>
                     <Modal.Title>Are you sure you want to delete this deck?</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                <li>
-                <Button variant="secondary" onClick = {() => handleYes(props.title)}>
-                    Yes
-                </Button>
+                <Modal.Body style = {{backgroundColor:"#D0C9C0"}} >
+                <li style = {{listStyle:"none"}}>
+                    <ul>
+                        <Button style = {{backgroundColor:'#6D8B74', border:"none", color:"white", marginLeft:"5.8rem"}} variant="secondary" onClick = {() => handleYes(props.title)}> Yes</Button>
+                    </ul>
+                    <ul>
+                        <Button style = {{backgroundColor:'#6D8B74', border:"none", color:"white", marginLeft:"5.8rem"}} variant="secondary" onClick={handleClose}> Cancel </Button>
+                    </ul>
                 </li>
-                <li>
-                <Button variant="secondary" onClick={handleClose}>
-                    Cancel
-                </Button>
-              </li>
                 </Modal.Body>
             </Modal>
         </div>

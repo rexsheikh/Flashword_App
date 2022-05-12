@@ -7,7 +7,7 @@ import { Container,Row,Col } from "react-bootstrap";
 const DisplayCards = (props) => {
 
     return ( 
-        <Container style = {{height:"100vh",width:"100vw"}}>
+        <Container style = {{height:"40vh",width:"100vw"}}>
           <Row>
             {props.parentDecks.map((deck,i) => {
                 if(deck.words.length === 0){

@@ -8,6 +8,7 @@ const Calendar = (props) => {
 
     const [user, token] = useAuth();
     const[dates,setDates] = useState()
+    
 
     useEffect(() => {
         getDates();
@@ -75,19 +76,31 @@ function packageData(arr){
     }
     return container
 }
+ 
+let data = packageData(dates)
+let options = {
+  calendar: {
+    dayOfWeekLabel: {
+      fontSize: 12,
+      color: 'white',
+      bold: false,
+      italic: false
+    },
+  }
+};
 
 
-// const data = packageData(dates)
-// <Chart
-// chartType="Calendar"
-// width="100%"
-// height="400px"
-// data= {data}
-// />
+
  
     return (  
-    <div>
-
+    <div style = {{backgroundColor:"#5F7161"}}>
+        <Chart
+    chartType="Calendar"
+    width="100%"
+    height="400px"
+    data = {data}
+    options = {options}
+    />
     </div>
     );
 

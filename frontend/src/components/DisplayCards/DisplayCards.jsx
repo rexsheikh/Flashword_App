@@ -10,6 +10,14 @@ const DisplayCards = (props) => {
         <Container style = {{height:"400px"}}>
           <Row>
             {props.parentDecks.map((deck,i) => {
+                if(deck.words.length === 0){
+                    i--;
+                    return(
+                        <TitleCard
+                        deck = {deck}
+                        />
+                    )
+                }else{
                 return (
                     <Col style = {{position:"relative"}}>
                         <TitleCard
@@ -22,7 +30,7 @@ const DisplayCards = (props) => {
                     </Col>
                     
                 )
-            })}
+            }})}
             </Row>
         </Container>
      );

@@ -51,12 +51,18 @@ def get_word(request, word_search):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def get_deck(request, pk):
-    deck = get_object_or_404(Deck, pk=pk)
-    serializer = DeckSerializer(deck)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if request.method == 'GET':
+        deck = get_object_or_404(Deck, pk=pk)
+        serializer = DeckSerializer(deck)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'POST':
+        serializer = DeckSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['PATCH'])
@@ -88,7 +94,7 @@ def update_word_reviews(request, word_search, date_search):
     word = get_object_or_404(Word, word=word_search)
     dates = word.dates.all()
     try:
-        date = dates.get(date=date_search)
+        date = dates.order_by('date').first()
         date.reviews += 1
         date.save()
     except ObjectDoesNotExist:
@@ -137,3 +143,19 @@ def review_average(request):
     dates = Date.objects.all().aggregate(Avg('reviews'))
     custom_dict['total'] = dates
     return Response(custom_dict)
+
+
+@ api_view(['DELETE'])
+@ permission_classes([IsAuthenticated])
+def delete_deck(request, deck_title):
+    deck = get_object_or_404(Deck, title=deck_title)
+    deck.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@ api_view(['DELETE'])
+@ permission_classes([IsAuthenticated])
+def delete_word(request, word_search):
+    word = get_object_or_404(Word, word=word_search)
+    word.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)

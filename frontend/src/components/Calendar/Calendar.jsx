@@ -77,18 +77,17 @@ function packageData(arr){
 }
 
 
+// const data = packageData(dates)
 // <Chart
 // chartType="Calendar"
 // width="100%"
 // height="400px"
 // data= {data}
 // />
-
-
  
     return (  
     <div>
- 
+
     </div>
     );
 

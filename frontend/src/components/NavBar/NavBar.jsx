@@ -4,10 +4,14 @@ import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import "./NavBar.css";
+import AddDeck from "../EditDecks/AddDeckModal";
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+
+
 
   return (
     <div className="navBar">
@@ -19,6 +23,9 @@ const Navbar = () => {
             <b style = {{fontFamily: "Roboto Mono, monospace",fontSize:"50px"}}>shWord</b>
           </Link>
         </li>
+        <li>
+          <AddDeck/>
+      </li>
         <li>
           {user ? (
             <button style = {{backgroundColor:"#6D8B74", borderRadius:"20px", border:"10px", fontFamily: "Roboto Mono, monospace", marginTop:"17px"}} onClick={logoutUser}>Logout</button>

@@ -1,19 +1,8 @@
-// const words = props.parentDecks.map((deck)=> deck.words.map((date) => date.dates.map((date)=>date.date)))
-// const flat = words.flat(Infinity)
-// function getDateArray(arr = flat){
-//     let res = [];
-//     for(let i = 0; i < arr.length; i++){
-//         res.push([new Date(arr[i])])
-//     }
-//     return res
-// }
-
 import { useEffect } from 'react';
 import { Chart } from 'react-google-charts';
 import { useState } from 'react'
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
-
 
 const Calendar = (props) => {
 
@@ -53,19 +42,7 @@ function scoreAgg(arr){
     return dict  
 }
 
-// console.log(dates)
-// let sampleDate = dates[4].date
-// let new_date = sampleDate.split('-')
-// function ints(arr){
-//     let res = []
-//    for(let i = 0; i < new_date.length; i++){
-//     res.push(parseInt(new_date[i]))
-// }
-// return res
-// }
-// let int_list = ints(new_date)
-// console.log(int_list)
-// let res = new Date (int_list[0],int_list[1],int_list[2])
+
 
 function formatDates(str){
 let res = []
@@ -99,22 +76,19 @@ function packageData(arr){
     return container
 }
 
-let test = packageData(dates)
-console.log(test)
 
-let data = test
-
+// <Chart
+// chartType="Calendar"
+// width="100%"
+// height="400px"
+// data= {data}
+// />
 
 
  
     return (  
     <div>
-        <Chart
-        chartType="Calendar"
-        width="100%"
-        height="400px"
-        data= {data}
-        />
+ 
     </div>
     );
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 
 
-const MainModal = () => {
+const MainModal = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -13,10 +13,10 @@ const MainModal = () => {
     const [user, token] = useAuth();
     console.log(query)
 
-    const handleSearch = () =>{
+    const handleSearch = (currentTitle) =>{
         getWebsterWord();
         createWord();
-        addWord();
+        addWord(currentTitle);
       }
 
     const getWebsterWord = async () =>{
@@ -50,13 +50,13 @@ const MainModal = () => {
             console.log(error.message)
             }}
 
-      const addWord = async () => {
+      const addWord = async (currentTitle) => {
           let body = {
 
           };
          try {
            let response = await axios.patch(
-             `http://127.0.0.1:8000/api/decks/add_word/6/${query}/`,
+             `http://127.0.0.1:8000/api/decks/add_word/${currentTitle}/${query}/`,
              body,
              {
              headers: {
@@ -84,15 +84,12 @@ const MainModal = () => {
                     <input type = "text"
                     onChange={(e) => setQuery(e.target.value)}
                     />
-                    <button type="submit" onClick = {handleSearch}>submit</button>
+                    <button type="submit" onClick = {() => handleSearch(props.title)}>submit</button>
               </li>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>

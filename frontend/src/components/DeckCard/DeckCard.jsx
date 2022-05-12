@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { Card} from 'react-bootstrap';
 import DeleteDeck from '../EditDecks/DeleteDeckModal';
+import MainModal from '../Modal/Modal';
 
 
 const DeckCard = (props) => {
@@ -121,6 +122,8 @@ function handleAgainClick(currentWord,currentWordScore,today){
   <div className="title-example">
     <Card style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace",position:"absolute",zIndex:"0"}}>
         <Card.Body>
+          <DeleteDeck title = {props.deck.title} />
+          <MainModal title = {props.deck.title}/>
           <Card.Title>{props.deck.words[index].word}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
               <button className = "card-button" onClick = {handleDefClick}> Show Definition</button>

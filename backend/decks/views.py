@@ -67,8 +67,8 @@ def get_deck(request, pk):
 
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
-def add_word(request, pk, word):
-    deck = get_object_or_404(Deck, pk=pk)
+def add_word(request, title_search, word):
+    deck = get_object_or_404(Deck, title=title_search)
     word = get_object_or_404(Word, word=word)
     deck.words.add(word)
     serializer = DeckSerializer(deck, data=request.data, partial=True)

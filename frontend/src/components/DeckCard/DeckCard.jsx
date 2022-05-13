@@ -38,6 +38,9 @@ function handleGoodClick(currentWord,currentWordScore,today){
   updateWordScore(currentWord,currentWordScore)
   updateWordReviews(currentWord,today)
   setShowDef("hide")
+  if(props.deck.words[index +1].score > 10){
+    setIndex(index + 2)
+  }
   if(props.deck.words.length === index +1){
     setIndex(0)
   }else{
@@ -135,7 +138,7 @@ function handleAgainClick(currentWord,currentWordScore,today){
   
 
   return (  
-  <div >
+  <div>
     <Card style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace",position:"absolute",zIndex:"0",marginTop:"2rem"}}>
         <Card.Body>
           <Card.Title>{props.deck.words[index].word}</Card.Title>

@@ -6,6 +6,7 @@ import { Container,Row,Col } from "react-bootstrap";
 
 const DisplayCards = (props) => {
 
+
     return ( 
         <Container style = {{height:"40vh",width:"100vw"}}>
           <Row>

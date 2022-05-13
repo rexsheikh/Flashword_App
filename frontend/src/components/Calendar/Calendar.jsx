@@ -6,12 +6,15 @@ import useAuth from '../../hooks/useAuth';
 
 const Calendar = (props) => {
     const [user, token] = useAuth();
-    const[dates,setDates] = useState()
-    const[data,setData] = useState()
+    const[dates,setDates] = useState();
+    const[data,setData] = useState();
+    const[avg,setAvg] = useState([]);
+    console.log(avg.total)
     
 
     useEffect(() => {
         getDates();
+        getAvg();
       }, [token]);
 
 const getDates = async () =>{
@@ -25,6 +28,21 @@ const getDates = async () =>{
         }
       );
         setDates(response.data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+const getAvg = async () =>{
+    try {
+      let response = await axios.get(
+        `http://127.0.0.1:8000/api/decks/review_average/`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
+      );
+        setAvg(response.data);
     } catch (e) {
       console.log(e.message);
     }
@@ -48,7 +66,7 @@ let options = {
     },
   }
 };
-  if(dates === undefined){
+  if(dates === undefined || avg === undefined){
     return(
       <h2> chart loading....</h2>
     )
@@ -70,7 +88,7 @@ let options = {
   for(let i = 0; i < lst.length; i++){
       res.push(parseInt(lst[i]))
   }
-  return new Date (res[0],res[1],res[2])
+  return new Date (res[0],res[1] -1 ,res[2])
   }
   let packageData = function packageData(arr){
       let container = []
@@ -97,6 +115,7 @@ let options = {
     let data = packageData(dates)
   return (  
   <div style = {{backgroundColor:"#5F7161"}}>
+    <h4 style = {{marginLeft:"20rem",color:'#EFEAD8'}}> Average Cards/Day : {avg.total.reviews__avg} </h4>
     <Chart
   chartType="Calendar"
   width="100%"

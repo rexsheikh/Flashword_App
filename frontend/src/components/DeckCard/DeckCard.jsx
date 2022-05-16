@@ -136,9 +136,12 @@ function handleAgainClick(currentWord,currentWordScore,today){
   }
 
   
-
-  return (  
-  <div>
+  if(props.deck === undefined){
+    return(
+      <h2>decks loading...</h2>
+    )
+  }else{
+  return (    
     <Card style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace",position:"absolute",zIndex:"0",marginTop:"2rem"}}>
         <Card.Body>
           <Card.Title>{props.deck.words[index].word}</Card.Title>
@@ -159,8 +162,6 @@ function handleAgainClick(currentWord,currentWordScore,today){
           </Card.Footer>
         </Card.Body>
       </Card>
-  </div>
-        
-    );
+    )};
 }
 export default DeckCard;

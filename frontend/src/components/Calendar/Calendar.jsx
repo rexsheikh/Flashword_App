@@ -9,7 +9,6 @@ const Calendar = (props) => {
     const[dates,setDates] = useState();
     const[data,setData] = useState();
     const[avg,setAvg] = useState([]);
-    console.log(avg.total)
     
 
     useEffect(() => {
@@ -32,6 +31,7 @@ const getDates = async () =>{
       console.log(e.message);
     }
   }
+  
 const getAvg = async () =>{
     try {
       let response = await axios.get(
@@ -66,9 +66,13 @@ let options = {
     },
   }
 };
-  if(dates === undefined || avg === undefined){
+  if(!dates || ! avg){
     return(
       <h2> chart loading....</h2>
+    )
+  }else if(avg === undefined){
+    return(
+      <h2> chart loading...</h2>
     )
   }else{
     let scoreAgg = function scoreAgg(arr){
@@ -115,14 +119,16 @@ let options = {
     let data = packageData(dates)
   return (  
   <div style = {{backgroundColor:"#5F7161"}}>
-    <h4 style = {{marginLeft:"20rem",color:'#EFEAD8'}}> Average Cards/Day : {avg.total.reviews__avg} </h4>
-    <Chart
-  chartType="Calendar"
-  width="100%"
-  height="400px"
-  data = {data}
-  options = {options}
-  />
+  <h4 style = {{marginLeft:"50rem",color:'#EFEAD8'}}> Average Cards/Day : {avg.total.reviews__avg} </h4>
+  <div style = {{marginLeft:"30rem"}}>
+      <Chart
+    chartType="Calendar"
+    width="100%"
+    height="400px"
+    data = {data}
+    options = {options}
+    />
+  </div>
   </div>
   );
       

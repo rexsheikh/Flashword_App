@@ -2,10 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import DeckCard from "../../components/DeckCard/DeckCard";
-import MainModal from "../../components/Modal/Modal";
 import DisplayCards from "../../components/DisplayCards/DisplayCards";
 import Calendar from "../../components/Calendar/Calendar";
+import AddDeck from "../../components/EditDecks/AddDeckModal";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -32,15 +31,17 @@ const HomePage = () => {
     }
   }
 
+ 
 
-  
+  // // <Calendar parentDecks = {decks}/>
   if(decks.length == 0){
     return(
       <div> decks loading... </div>
     )
   }else{
   return (
-    <div style = {{backgroundColor:"#5F7161",border:"2px solid white",paddingTop:"2rem",height:"50vh"}}>
+    <div style = {{backgroundColor:"#5F7161",border:"2px solid white",paddingTop:"2rem",height:"60vh"}}>
+      <AddDeck/>
       <DisplayCards parentDecks = {decks}/>
       <Calendar parentDecks = {decks}/>
     </div>

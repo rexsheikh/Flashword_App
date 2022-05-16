@@ -19,5 +19,18 @@
     border: none;
 }
 
+.suggested__videos {
+    flex: 0.915;
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    background-color: #181818;
+    padding: 1rem 1rem;
+    padding-bottom: 0;  
+  }
 
-
+  .suggestedVideos_videos {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  

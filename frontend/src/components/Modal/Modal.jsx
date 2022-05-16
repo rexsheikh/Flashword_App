@@ -98,7 +98,7 @@ const MainModal = (props) => {
                 </Modal.Header>
                 <Modal.Body style = {{backgroundColor:"#D0C9C0"}}>
 
-                <li>
+                <li style = {{listStyleType:"none"}}>
                     <input type = "text"
                     onChange={(e) => setQuery(e.target.value)}
                     />

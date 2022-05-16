@@ -24,11 +24,8 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <AddDeck/>
-         </li>
-        <li>
           {user ? (
-            <button style = {{backgroundColor:"#6D8B74", borderRadius:"20px", border:"10px", fontFamily: "Roboto Mono, monospace", marginTop:"17px"}} onClick={logoutUser}>Logout</button>
+            <button style = {{backgroundColor:"#6D8B74", borderRadius:"20px", fontFamily: "Roboto Mono, monospace", marginTop:"17px",borderColor:"white"}} onClick={logoutUser}>Logout</button>
           ) : (
             <button onClick={() => navigate("/login")}>Login</button>
           )}

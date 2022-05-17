@@ -21,6 +21,7 @@ const MainModal = (props) => {
         createWord();
         addWord(currentTitle);
         fetchDecks()
+        handleClose()
       }
 
     const getWebsterWord = async () =>{

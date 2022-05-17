@@ -21,10 +21,8 @@ let yyyy = today.getFullYear();
 
 today = yyyy + '-' + mm + '-' + dd;
 today = today.toString()
+console.log(today)
  
-
-
-
  function handleDefClick(){
      setShowDef("show")
  }
@@ -32,15 +30,11 @@ today = today.toString()
 
 function handleGoodClick(currentWord,currentWordScore,today){
   console.log(props.deck)
-  console.log(props.deck.words.length)
   getWord(currentWord)
   setScore(currentWordScore + 1)
   updateWordScore(currentWord,currentWordScore)
   updateWordReviews(currentWord,today)
   setShowDef("hide")
-  if(props.deck.words[index +1].score > 10){
-    setIndex(index + 2)
-  }
   if(props.deck.words.length === index +1){
     setIndex(0)
   }else{
@@ -136,11 +130,12 @@ function handleAgainClick(currentWord,currentWordScore,today){
   }
 
   
-  if(props.deck === undefined){
+  if(!props.deck){
     return(
       <h2>decks loading...</h2>
     )
-  }else{
+  }
+  else{
   return (    
     <Card style={{ width: '18rem', backgroundColor:"#EFEAD8", borderRadius:"20px", fontFamily: "Roboto Mono, monospace",position:"absolute",zIndex:"0",marginTop:"2rem"}}>
         <Card.Body>

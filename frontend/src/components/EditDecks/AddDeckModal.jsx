@@ -1,5 +1,5 @@
 import { Modal,Button } from "react-bootstrap";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 
@@ -10,12 +10,37 @@ const AddDeck = () => {
     const[word,setWord] = useState('')
     const [user, token] = useAuth();
     const [title,setTitle] = useState()
+    const[decks,setDecks] = useState([])
 
-    const handleEntry = () =>{
+    const handleEntry = () => {
         createDeck()
+        handleClose()
       }
 
+    
+    useEffect(() => {
+        fetchDecks();
+    },);
 
+
+    useEffect(() => {
+        fetchDecks();
+      }, [token]);
+    
+      const fetchDecks = async () => {
+        try {
+          let response = await axios.get("http://127.0.0.1:8000/api/decks/",{
+            headers: {
+              Authorization: "Bearer " + token
+            },
+          });
+          setDecks(response.data);
+        } catch (error) {
+          console.log(error.message)
+        }
+      }
+
+      
     const createDeck = async () => {
         let body = {
             user: user.username,
@@ -62,9 +87,6 @@ const AddDeck = () => {
                 <Modal.Footer style = {{backgroundColor:"#D0C9C0"}}>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose} style = {{backgroundColor:'#6D8B74', border:"none"}}>
-                        Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>

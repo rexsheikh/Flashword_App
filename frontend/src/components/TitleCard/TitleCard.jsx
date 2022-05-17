@@ -20,7 +20,10 @@ const TitleCard = (props) => {
                     <li> <MainModal title = {props.deck.title}/></li>
                 </ul>
                 <h2> {props.deck.title} </h2>
-                <button style = {{backgroundColor:'#6D8B74', border:"none", color:"white", marginLeft:"5.8rem"}}onClick = {handleClick}> Click to Start </button>
+                <button style = {{backgroundColor:'#6D8B74', border:"none", color:"white", marginLeft:"5.8rem",borderRadius:"10px"}}onClick = {handleClick}> Click to Start </button>
+                <Card.Footer style = {{backgroundColor:"#EFEAD8",border:"none"}}>
+                    <h6>Cards Due: {props.deck.words.length}</h6>
+                </Card.Footer>
             </Card>
             <div>
 

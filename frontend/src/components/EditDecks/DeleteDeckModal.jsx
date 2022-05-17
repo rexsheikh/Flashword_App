@@ -15,6 +15,7 @@ const DeleteDeck = (props) => {
 
     const handleYes = (currentTitle) =>{
         deleteDeck(currentTitle)
+        handleClose()
       }
 
 
